@@ -5,6 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My GitHub Site</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* -------------------------------------------------
+       Tab styling – you can move this to styles.css
+       ------------------------------------------------- */
+    .tab-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .tab-buttons {
+      display: flex;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tab-btn:hover { background: #e0e0e0; }
+    .tab-btn.active {
+      background: #fff;
+      font-weight: bold;
+      border-bottom: 3px solid #0066cc;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 1.5rem;
+      background: #fff;
+    }
+
+    .tab-content.active { display: block; }
+
+    /* Simple grid for items inside tabs */
+    .tab-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-radius: 6px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-body {
+      padding: 0.75rem;
+    }
+
+    .card a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .card a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
   <header>
@@ -23,6 +97,69 @@
       </p>
     </section>
 
+    <!-- ==================== TABS ==================== -->
+    <section class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="projects">Projects</button>
+        <button class="tab-btn" data-tab="certs">Certificates</button>
+      </div>
+
+      <!-- Projects Tab -->
+      <div id="projects" class="tab-content active">
+        <h3 style="margin-top:0;">My Projects</h3>
+        <div class="tab-grid">
+          <!-- ==== Example Project Card ==== -->
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180?text=Project+1" alt="Project 1">
+            <div class="card-body">
+              <h4>Project One</h4>
+              <p>Short description of what the project does.</p>
+              <a href="https://github.com/DNwolf/project-one" target="_blank">View on GitHub</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180?text=Project+2" alt="Project 2">
+            <div class="card-body">
+              <h4>Project Two</h4>
+              <p>Another cool thing I built.</p>
+              <a href="https://github.com/DNwolf/project-two" target="_blank">View on GitHub</a>
+            </div>
+          </div>
+
+          <!-- Add as many cards as you need -->
+        </div>
+      </div>
+
+      <!-- Certificates Tab -->
+      <div id="certs" class="tab-content">
+        <h3 style="margin-top:0;">Certificates</h3>
+        <div class="tab-grid">
+          <!-- ==== Example Certificate Card ==== -->
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180?text=Cert+AWS" alt="AWS Certified">
+            <div class="card-body">
+              <h4>AWS Solutions Architect</h4>
+              <p>Issued: Jan 2024</p>
+              <a href="https://www.credly.com/badges/xxxxxx" target="_blank">View Credential</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="https://via.placeholder.com/300x180?text=Cert+Google" alt="Google Cloud">
+            <div class="card-body">
+              <h4>Google Cloud Professional</h4>
+              <p>Issued: Jun 2023</p>
+              <a href="https://www.credential.net/xxxxxx" target="_blank">View Credential</a>
+            </div>
+          </div>
+
+          <!-- Add more certificates here -->
+        </div>
+      </div>
+    </section>
+    <!-- ================== END TABS ================== -->
+
     <section>
       <h2>Quick Links</h2>
       <ul class="links">
@@ -35,13 +172,30 @@
 
   <footer>
     <div class="container">
-      <p>© <span id="year"></span> Your Name – Hosted on <a href="https://pages.github.com">GitHub Pages</a></p>
+      <p>© <span id="year"></span> Omar Basheer – Hosted on <a href="https://pages.github.com">GitHub Pages</a></p>
     </div>
   </footer>
 
   <script>
     // Auto-update year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---------- Tab switching ----------
+    const buttons = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all
+        buttons.forEach(b => b.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        // Add active class to clicked button & matching content
+        btn.classList.add('active');
+        const target = document.getElementById(btn.dataset.tab);
+        target.classList.add('active');
+      });
+    });
   </script>
 </body>
 </html>
