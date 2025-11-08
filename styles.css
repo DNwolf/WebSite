@@ -1,364 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Omar Basheer – Network & Security Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ====================== RESET & BASE ====================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      line-height: 1.7;
-      padding: 2rem 0;
-    }
-    a { color: #58a6ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    ul { list-style: none; }
-    pre, code { font-family: 'JetBrains Mono', monospace; }
+/* ================================== RESET & BASE ================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* ====================== LAYOUT ====================== */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #e5e7eb;
+  background: #0d1117;
+  scroll-behavior: smooth;
+}
 
-    /* ====================== HEADER ====================== */
-    .hero {
-      text-align: center;
-      padding: 3rem 0 2.5rem;
-      border-bottom: 1px solid #30363d;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #f0f6fc;
-      margin-bottom: 0.5rem;
-    }
-    .tagline {
-      font-size: 1.1rem;
-      color: #8b949e;
-      margin-bottom: 1.5rem;
-    }
-    .social {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .social a {
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border: 1px solid #30363d;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .social a:hover {
-      background: #21262d;
-      border-color: #58a6ff;
-      color: #58a6ff;
-    }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    /* ====================== MAIN SECTIONS ====================== */
-    main { margin-top: 3rem; }
-    section {
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #30363d;
-    }
-    section:last-of-type { border-bottom: none; }
-    h2 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: #f0f6fc;
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: #58a6ff;
-      border-radius: 2px;
-    }
+a {
+  color: #58a6ff;
+  text-decoration: none;
+}
 
-    /* About */
-    #about p {
-      font-size: 1.1rem;
-      background: #161b22;
-      padding: 1.5rem;
-      border-radius: 8px;
-      border-left: 4px solid #58a6ff;
-    }
+a:hover {
+  text-decoration: underline;
+}
 
-    /* Certifications */
-    .certs-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .certs-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #161b22;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      transition: transform 0.2s;
-    }
-    .certs-list li:hover { transform: translateX(4px); }
-    .toggle-pdf-btn {
-      background: #21262d;
-      color: #58a6ff;
-      border: 1px solid #30363d;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .toggle-pdf-btn:hover {
-      background: #58a6ff;
-      color: #0d1117;
-      border-color: #58a6ff;
-    }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-    /* PDF Viewer */
-    #pdf-container {
-      display: none;
-      margin-top: 1.5rem;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      overflow: hidden;
-      background: #161b22;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    }
-    #pdf-iframe { border: none; width: 100%; height: 600px; }
+pre {
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  background: #0d1117;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+}
 
-    /* Skills Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220_px, 1fr));
-      gap: 1rem;
-    }
-    .skills-grid > div {
-      background: #161b22;
-      padding: 1rem;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      border-left: 3px solid #30363d;
-    }
-    .skills-grid strong { color: #58a6ff; }
+/* ================================== LAYOUT ================================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
 
-    /* Projects */
-    .project {
-      background: #161b22;
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      border: 1px solid #30363d;
-    }
-    .project h3 {
-      color: #58a6ff;
-      margin-bottom: 0.75rem;
-      font-size: 1.2rem;
-    }
-    .project p { margin-bottom: 0.5rem; font-size: 0.95rem; }
-    .project a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-weight: 500;
-    }
+main {
+  flex: 1;
+}
 
-    /* Code */
-    pre {
-      background: #0d1117;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      border: 1px solid #30363d;
-      font-size: 0.9rem;
-    }
-    code { color: #79c0ff; }
+footer {
+  margin-top: auto;
+}
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      color: #8b949e;
-      font-size: 0.9rem;
-    }
-    footer a { color: #58a6ff; }
+/* ================================== HEADER ================================== */
+.hero {
+  background: linear-gradient(135deg, #1f6feb, #1a56db);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 1rem;
+}
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.2rem; }
-      .social { flex-direction: column; align-items: center; }
-      .social a { width: 160px; }
-    }
-  </style>
-</head>
-<body>
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
 
-  <!-- ====================== HEADER ====================== -->
-  <header class="hero">
-    <div class="container">
-      <h1>Omar Basheer</h1>
-      <p class="tagline">Network Engineer | CompTIA Network+ | CCNA Candidate</p>
-      <nav class="social">
-        <a href="https://github.com/DNwolf" target="_blank" aria-label="GitHub">GitHub</a>
-        <a href="https://www.linkedin.com/in/omar-basheer-7741341b9/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-        <a href="mailto:omarbasheeromar@gmail.com" aria-label="Email">Email</a>
-      </nav>
-    </div>
-  </header>
+.hero .tagline {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
 
-  <!-- ====================== MAIN ====================== -->
-  <main class="container">
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
 
-    <!-- === About === -->
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m Omar Basheer. I graduated with a Bachelor’s in Information and Network Security from Arab Open University in Jeddah.  
-        I taught myself Linux, CompTIA Network+, and hands-on networking—built live IP cameras with Raspberry Pi and Python, and set up full LAN/WAN labs in GNS3 and VMware.  
-        At Smart IT Solutions I configured routers, switches, firewalls, and NAS systems.  
-        Now at Bupa I secure patient data and automate checks that save hours every week.  
-        I’m prepping for OSCP and still play modded Minecraft to relax. That’s me.
-      </p>
-    </section>
+.social a {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: white;
+  padding: 0.4rem 0;
+  transition: opacity 0.2s ease;
+}
 
-    <!-- === Certifications === -->
-    <section id="certs">
-      <h2>Certifications</h2>
-      <ul class="certs-list">
-        <li>
-          <strong>CompTIA Network+</strong> 
-          <button class="toggle-pdf-btn" data-pdf="Certs/CompTIA Network+ ce certificate.pdf">
-            Show Certificate
-          </button>
-        </li>
-        <li><strong>CompTIA Security+</strong> <em>(in progress)</em></li>        
-      </ul>
+.social a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}
 
-      <!-- Embedded PDF Viewer -->
-      <div id="pdf-container">
-        <iframe id="pdf-iframe"></iframe>
-      </div>
-    </section>
+/* ================================== SECTIONS ================================== */
+section {
+  margin: 3rem 0;
+}
 
-    <!-- === Skills === -->
-    <section id="skills">
-      <h2>Technical Skills</h2>
-      <div class="skills-grid">
-        <div><strong>Routing</strong>: OSPF, EIGRP, Static</div>
-        <div><strong>Switching</strong>: VLANs, Trunking, STP</div>
-        <div><strong>Tools</strong>: Wireshark, GNS3, VMware</div>
-        <div><strong>Automation</strong>: Python Scripting</div>
-        <div><strong>Cloud</strong>: AWS, Azure (Basics)</div>
-        <div><strong>OS</strong>: Linux (Ubuntu), Windows</div>
-      </div>
-    </section>
+section h2 {
+  font-size: 1.8rem;
+  color: #58a6ff;
+  margin-bottom: 0.8rem;
+  border-bottom: 2px solid #30363d;
+  padding-bottom: 0.4rem;
+  font-weight: 600;
+}
 
-    <!-- === Projects === -->
-    <section id="projects">
-      <h2>Key Projects</h2>
+section p,
+section li {
+  margin-bottom: 0.6rem;
+  color: #c9d1d9;
+  font-size: 1rem;
+}
 
-      <article class="project">
-        <h3>Multi-Site LAN Redesign (Homelab)</h3>
-        <p><strong>Situation:</strong> Simulated 3-branch network with overlapping subnets and no redundancy.</p>
-        <p><strong>Task:</strong> Implement proper IP scheme, VLAN segmentation, and HSRP failover.</p>
-        <p><strong>Action:</strong> Used GNS3, Cisco 7200 routers, L3 switches; wrote config scripts.</p>
-        <p><strong>Result:</strong> 100% uptime during simulated link failure; full documentation.</p>
-        <p><a href="https://github.com/DNwolf/gns3-lan-redesign" target="_blank">View Repo →</a></p>
-      </article>
+/* ================================== CERTIFICATIONS ================================== */
+.certs-list {
+  list-style: none;
+}
 
-      <article class="project">
-        <h3>Packet Capture & QoS Analysis</h3>
-        <p>Used Wireshark to diagnose VoIP jitter in a campus lab. Identified misconfigured CoS and applied QoS policy.</p>
-        <p>Reduced packet loss from 12% to less than 1%.</p>
-      </article>
-    </section>
+.certs-list li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
-    <!-- === Diagrams === -->
-    <section id="diagrams">
-      <h2>Network Diagrams</h2>
-      <p><em>Coming soon:</em> Before/After topology of the LAN redesign (Visio → PNG).</p>
-    </section>
+/* Clickable Text (looks like link, not button) */
+.toggle-pdf-btn {
+  background: none;
+  border: none;
+  color: #58a6ff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
 
-    <!-- === Code Snippets === -->
-    <section id="code">
-      <h2>Sample Configuration</h2>
-      <pre><code># VLAN & Trunk on Cisco Switch
-interface GigabitEthernet0/1
- switchport mode trunk
- switchport trunk allowed vlan 10,20,30
- spanning-tree portfast</code></pre>
-    </section>
+.toggle-pdf-btn:hover {
+  color: #7bb8ff;
+  text-decoration: underline;
+}
 
-    <!-- === Homelab === -->
-    <section id="homelab">
-      <h2>Homelab</h2>
-      <p>Running on a Dell PowerEdge with ESXi:</p>
-      <ul style="margin-left: 1.5rem; list-style: disc; margin-top: 0.5rem;">
-        <li>GNS3 VM – multi-area OSPF + BGP</li>
-        <li>pfSense firewall + OpenVPN</li>
-        <li>Ansible control node (learning playbooks)</li>
-      </ul>
-      <p style="margin-top: 1rem;"><a href="https://github.com/DNwolf/homelab" target="_blank">Homelab Repo →</a></p>
-    </section>
 
-  </main>
+/* ================================== PDF VIEWER ================================== */
+#pdf-container {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-top: 1.5rem;
+}
 
-  <!-- ====================== FOOTER ====================== -->
-  <footer>
-    <div class="container">
-      <p>© <span id="year"></span> Omar Basheer – Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
-    </div>
-  </footer>
+#pdf-iframe {
+  display: block;
+  width: 100%;
+  height: 600px;
+  border: none;
+}
 
-  <!-- ====================== SCRIPTS ====================== -->
-  <script>
-    // Auto-update year
-    document.getElementById('year').textContent = new Date().getFullYear();
+/* ================================== SKILLS GRID ================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
 
-    // Toggle PDF
-    const pdfContainer = document.getElementById('pdf-container');
-    const iframe = document.getElementById('pdf-iframe');
-    let activeButton = null;
+.skills-grid > div {
+  background: #161b22;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: 1px solid #30363d;
+}
 
-    document.querySelectorAll('.toggle-pdf-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const pdfUrl = this.getAttribute('data-pdf');
+/* ================================== PROJECTS ================================== */
+.project {
+  background: #161b22;
+  padding:  1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #30363d;
+}
 
-        if (activeButton && activeButton !== this) {
-          activeButton.textContent = 'Show Certificate';
-        }
+.project h3 {
+  color: #58a6ff;
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
 
-        if (pdfContainer.style.display === 'block' && activeButton === this) {
-          pdfContainer.style.display = 'none';
-          iframe.src = '';
-          this.textContent = 'Show Certificate';
-          activeButton = null;
-        } else {
-          iframe.src = pdfUrl;
-          pdfContainer.style.display = 'block';
-          this.textContent = 'Hide Certificate';
-          activeButton = this;
-          setTimeout(() => pdfContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+.project p {
+  margin-bottom: 0.5rem;
+}
+
+.project a {
+  color: #58a6ff;
+  font-weight: 500;
+}
+
+/* ================================== CODE SNIPPETS ================================== */
+#code pre {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* ================================== FOOTER ================================== */
+footer {
+  background: #010409;
+  color: #8b949e;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+footer a {
+  color: #58a6ff;
+}
+
+/* ================================== RESPONSIVE ================================== */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero .tagline {
+    font-size: 1.1rem;
+  }
+
+  .social {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .social a {
+    display: block;
+    padding: 0.5rem;
+  }
+
+  .certs-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .toggle-pdf-btn {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  #pdf-iframe {
+    height: 500px;
+  }
+}
